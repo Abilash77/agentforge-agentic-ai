@@ -38,7 +38,7 @@ Include ALL of these sections:
 
 > [One-line tagline]
 
-![License](badge) ![Version](badge) ![Build](badge) ![Coverage](badge) ![Docker](badge)
+![Version](badge) ![Build](badge) ![Coverage](badge) ![Docker](badge)
 
 ## ✨ Features
 [Feature list with emoji icons]
@@ -90,9 +90,6 @@ Include ALL of these sections:
 
 ## 🤝 Contributing
 [Contribution guide]
-
-## 📄 License
-[License text]
 
 ## 👥 Authors
 [Author section]

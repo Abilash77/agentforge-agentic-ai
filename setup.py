@@ -101,7 +101,6 @@ setup(
     description="AgentForge: A Multi-Agent Software Engineering Platform",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    license="MIT",
     keywords="metagpt multi-agent multi-role programming gpt llm metaprogramming",
     packages=find_packages(exclude=["contrib", "docs", "examples", "tests*"]),
     python_requires=">=3.9, <3.12",

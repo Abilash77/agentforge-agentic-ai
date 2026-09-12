@@ -81,20 +81,20 @@ def show():
                     border-radius:8px;padding:0.4rem 0.8rem;font-size:0.8rem;color:#f6ad55;">
             🧪 QA Engineer
         </div>
-        <div style="color:#718096;font-size:1.2rem;">→</div>
+        <div style="color:#718096;font-size:1.2rem;">+</div>
         <div style="background:rgba(99,179,237,0.1);border:1px solid rgba(99,179,237,0.3);
                     border-radius:8px;padding:0.4rem 0.8rem;font-size:0.8rem;color:#63b3ed;">
             📝 Docs
+        </div>
+        <div style="color:#718096;font-size:1.2rem;">+</div>
+        <div style="background:rgba(159,122,234,0.1);border:1px solid rgba(159,122,234,0.3);
+                    border-radius:8px;padding:0.4rem 0.8rem;font-size:0.8rem;color:#9f7aea;">
+            📊 PPT
         </div>
         <div style="color:#718096;font-size:1.2rem;">→</div>
         <div style="background:rgba(252,129,129,0.1);border:1px solid rgba(252,129,129,0.3);
                     border-radius:8px;padding:0.4rem 0.8rem;font-size:0.8rem;color:#fc8181;">
             🐳 DevOps
-        </div>
-        <div style="color:#718096;font-size:1.2rem;">→</div>
-        <div style="background:rgba(159,122,234,0.1);border:1px solid rgba(159,122,234,0.3);
-                    border-radius:8px;padding:0.4rem 0.8rem;font-size:0.8rem;color:#9f7aea;">
-            📊 PPT
         </div>
     </div>
     """, unsafe_allow_html=True)
