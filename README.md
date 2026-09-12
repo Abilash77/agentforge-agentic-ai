@@ -32,39 +32,90 @@ Basic AI coding chatbots are great for single-file scripts, but they lose contex
 
 AgentForge operates on a robust, decoupled architecture separating the user interface, backend task queue, and agent reasoning engine.
 
+### End-to-End System Architecture
+
 ```mermaid
 graph TD
-    User((User)) -->|Submits Idea| UI[Streamlit Frontend]
-    UI -->|REST + WebSocket| API[FastAPI Backend]
+    %% User Interaction
+    User((User)) -->|Inputs: Idea, Stack, Budget| UI
+
+    subgraph "1. User Interface"
+        UI[💻 Streamlit Dashboard]
+        UI -.-> Config[Project Configuration]
+    end
+
+    %% Backend & API
+    UI -->|REST API + WebSockets| API
+
+    subgraph "2. Backend API"
+        API[⚡ FastAPI Backend]
+    end
+
+    %% Task Orchestration
+    API -->|Enqueue Project| TM
+
+    subgraph "3. Task Orchestration"
+        TM[⚙️ Task Manager]
+        TM -.-> Queue[Priority Task Queue]
+        Queue -.-> Async[Async Execution]
+    end
+
+    %% Agent Pipeline
+    TM -->|Triggers| Pipeline[🔄 Agent Orchestrator]
+
+    %% Shared Intelligence Layer
+    subgraph "Shared Intelligence Layer"
+        RAG[(🧠 RAG Layer<br>ChromaDB, Context Injection)]
+        Mem[(💾 Memory Layer<br>SQLite, Project History)]
+        Mon[(📊 Monitoring Layer<br>Tokens, Costs, Logs)]
+    end
+
+    Pipeline <-->|Document Retrieval| RAG
+    Pipeline <-->|State & Persistence| Mem
+    Pipeline -->|Usage Metrics| Mon
     
-    API -->|Enqueue Task| TM[Task Manager / Pipeline]
-    
-    TM --> Agents[Specialized Agents]
-    
-    Agents <--> State[RAG / Memory / Database / Monitoring]
-    
-    State -->|Finalize| ZIP[Generated Software Outputs]
+    %% Final Output
+    Pipeline -->|Finalize| GenCode
+
+    subgraph "Final Output"
+        GenCode[📦 Generated Software Project]
+        GenCode -.-> Src[Source Code & Tests]
+        GenCode -.-> Docs[Documentation & PPT]
+        GenCode -.-> Deploy[Docker & CI/CD]
+    end
+
+    %% Feedback loop
+    GenCode -.->|Outputs| UI
+    Mon -.->|Live Dashboard Updates| UI
 ```
 
-### The Agent Workflow
+### Specialized Agent Execution Flow
 
 ```mermaid
-graph LR
-    Req[Requirement] --> PM[👩‍💼 Product Manager]
-    PM --> Arch[🏗️ Solution Architect]
-    Arch --> Dev[💻 Developer]
-    
-    Dev --> QA[🧪 QA]
-    Dev --> Docs[📝 Documentation]
-    Dev --> PPT[📊 Presentations]
-    
-    QA --> DevOps[🐳 DevOps]
-    Docs --> DevOps
-    PPT --> DevOps
-    
-    DevOps --> Out[Final Project Output]
+graph TD
+    Start([🚀 Project Requirement]) --> PM
+
+    subgraph "Sequential Execution"
+        PM[👩‍💼 1. Product Manager<br><i>BRD, SRS</i>] --> Arch
+        Arch[🏗️ 2. Solution Architect<br><i>Architecture, DB Schema</i>] --> Dev
+        Dev[💻 3. Developer<br><i>Frontend, Backend Code</i>]
+    end
+
+    subgraph "Parallel Execution"
+        Dev --> QA[🧪 4. QA Engineer<br><i>Tests, QA Reports</i>]
+        Dev --> Docs[📝 5. Documentation<br><i>README, API Docs</i>]
+        Dev --> PPT[📊 6. Presentations<br><i>Pitch Deck, Slides</i>]
+    end
+
+    subgraph "Finalization"
+        QA --> DevOps
+        Docs --> DevOps
+        PPT --> DevOps
+        DevOps[🐳 7. DevOps Agent<br><i>Docker, Deployment Config</i>]
+    end
+
+    DevOps --> Finish([📦 Final Software Package])
 ```
-*(Note: QA, Documentation, and Presentations execute concurrently after the Developer finishes, significantly speeding up the pipeline).*
 
 ## 💡 Example: Input → Output
 
