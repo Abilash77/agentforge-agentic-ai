@@ -3,28 +3,30 @@
   <img src="https://img.shields.io/badge/Python-3.10+-blue.svg" alt="Python">
   <img src="https://img.shields.io/badge/FastAPI-005571?logo=fastapi" alt="FastAPI">
   <img src="https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white" alt="Streamlit">
-  <img src="https://img.shields.io/badge/Powered_by-MetaGPT-blueviolet.svg" alt="MetaGPT">
   
   <h1>⚡ AgentForge</h1>
   <p><strong>Autonomous Multi-Agent Software Engineering Platform</strong></p>
-  <p><i>Transform natural language ideas into production-ready software using an orchestrated team of specialized AI agents.</i></p>
+  <p><i>Transform natural language ideas into comprehensive software project drafts using an orchestrated team of specialized AI agents.</i></p>
 </div>
 
 ---
 
 ## 📖 Overview
 
-**AgentForge** is an advanced AI-driven software engineering orchestrator built by **Abilash Aruva**. It acts as an autonomous virtual software company, where 7 specialized AI roles seamlessly collaborate to take a project from initial concept to a fully coded, tested, and documented software package. 
+**AgentForge** is an advanced AI-driven software engineering orchestrator built by **Abilash Aruva**. It acts as an autonomous virtual software company, where 7 specialized AI roles seamlessly collaborate to take a project from initial concept to a generated codebase, complete with documentation, tests, and deployment scripts.
 
 Unlike standard code-generation tools, AgentForge models the entire software development lifecycle (SDLC). It maintains deep context via Retrieval-Augmented Generation (RAG) and persistent memory, ensuring architectural consistency across the entire pipeline.
 
-## 🚀 Key Features
+## 🚀 Why AgentForge?
 
-- **Multi-Agent Pipeline**: Specialized AI roles (Product Manager, Architect, Developer, QA, DevOps, Documentation, Presentations) collaborate dynamically.
-- **Real-Time Monitoring**: A beautiful, glassmorphism-styled Streamlit dashboard connects via WebSockets to provide live terminal logs, cost updates, and pipeline progress.
-- **RAG & Persistent Memory**: Integrates ChromaDB and SQLite to maintain deep project history and context across agent executions, ensuring no context is lost between the Architect and the Developer.
-- **Cost & Token Tracking**: Tracks LLM token usage natively, ensuring projects stay within configurable budgets (USD).
-- **Asynchronous Task Management**: Supports concurrent background project executions using an asynchronous priority queue.
+Basic AI coding chatbots are great for single-file scripts, but they lose context when building complex applications. AgentForge solves this by employing a complete autonomous workflow:
+
+- **Specialized Agents**: 7 distinct AI roles (PM, Architect, Developer, etc.) each handle a specific phase of the SDLC.
+- **SDLC Orchestration**: A structured pipeline ensures requirements are written before architecture is designed, and architecture is designed before code is written.
+- **Shared Context (RAG)**: Uses ChromaDB to ensure that the Developer agent has access to the exact specifications written by the Architect.
+- **Persistent Project Memory**: SQLite tracks the exact state of the project, allowing you to monitor progress across all agents.
+- **Task Management**: An asynchronous priority queue handles multiple project generation tasks in the background.
+- **Monitoring & Token Tracking**: Accurately tracks LLM token usage and estimated costs natively, enforcing configurable USD budgets.
 
 ## 🏗️ Architecture & Workflow
 
@@ -32,48 +34,56 @@ AgentForge operates on a robust, decoupled architecture separating the user inte
 
 ```mermaid
 graph TD
-    %% User Interaction
     User((User)) -->|Submits Idea| UI[Streamlit Frontend]
     UI -->|REST + WebSocket| API[FastAPI Backend]
-
-    %% Backend Systems
-    subgraph Backend [Backend Engine]
-        API -->|Enqueue| TaskQueue[Task Manager Priority Queue]
-        TaskQueue -->|Execute| Orchestrator[Pipeline Orchestrator]
-        
-        %% Databases
-        Orchestrator <--> SQL[(SQLite: State)]
-        Orchestrator <--> Vector[(ChromaDB: RAG)]
-    end
-
-    %% Agent Pipeline
-    subgraph Pipeline [Multi-Agent Pipeline]
-        Orchestrator --> PM[👩‍💼 Product Manager]
-        PM --> Arch[🏗️ Solution Architect]
-        Arch --> Dev[💻 Developer]
-        
-        Dev --> QA[🧪 QA Engineer]
-        Dev --> Docs[📝 Documentation]
-        Dev --> PPT[📊 Presentations]
-        
-        QA --> DevOps[🐳 DevOps Engineer]
-        Docs --> DevOps
-    end
-
-    %% Output
-    DevOps -->|Finalize| ZIP[⬇️ ZIP Package]
-    ZIP --> User
+    
+    API -->|Enqueue Task| TM[Task Manager / Pipeline]
+    
+    TM --> Agents[Specialized Agents]
+    
+    Agents <--> State[RAG / Memory / Database / Monitoring]
+    
+    State -->|Finalize| ZIP[Generated Software Outputs]
 ```
 
 ### The Agent Workflow
 
-1. **👩‍💼 Product Manager**: Analyzes the raw idea, asks clarifying questions, and generates a Business Requirement Document (BRD) and Software Requirements Specification (SRS).
-2. **🏗️ Solution Architect**: Designs the technical architecture, database schemas, and C4 system diagrams based on the PM's specifications.
-3. **💻 Developer**: Writes the actual source code (Frontend and Backend) implementing the architecture.
-4. **🧪 QA Engineer**: Generates Unit, Integration, and End-to-End (E2E) test suites. *(Runs concurrently)*
-5. **📝 Documentation**: Writes the final `README.md`, setup guides, and API documentation. *(Runs concurrently)*
-6. **📊 Presentations**: Generates pitch decks and investor slides. *(Runs concurrently)*
-7. **🐳 DevOps**: Reviews the final codebase to generate Dockerfiles, Kubernetes manifests, and CI/CD pipelines.
+```mermaid
+graph LR
+    Req[Requirement] --> PM[👩‍💼 Product Manager]
+    PM --> Arch[🏗️ Solution Architect]
+    Arch --> Dev[💻 Developer]
+    
+    Dev --> QA[🧪 QA]
+    Dev --> Docs[📝 Documentation]
+    Dev --> PPT[📊 Presentations]
+    
+    QA --> DevOps[🐳 DevOps]
+    Docs --> DevOps
+    PPT --> DevOps
+    
+    DevOps --> Out[Final Project Output]
+```
+*(Note: QA, Documentation, and Presentations execute concurrently after the Developer finishes, significantly speeding up the pipeline).*
+
+## 💡 Example: Input → Output
+
+*(Illustrative Example)*
+
+**Input**: *"Build a URL shortener with FastAPI and React, using a PostgreSQL database."*
+
+**What the pipeline generates**:
+1. **Product Manager**: Generates a detailed Business Requirement Document (BRD) and Software Requirements Specification (SRS), outlining the core user journeys (e.g., short link creation, analytics dashboard).
+2. **Solution Architect**: Designs the technical architecture, defines the PostgreSQL database schema (Tables: `Users`, `Urls`, `Clicks`), and creates the API specifications.
+3. **Developer**: Writes the actual FastAPI backend routes and React frontend components based precisely on the Architect's schemas.
+4. **QA Engineer**: Generates Unit and Integration test files for the FastAPI routes.
+5. **Documentation**: Writes a comprehensive `README.md` and setup guide for the generated project.
+6. **Presentations**: Drafts a pitch deck outlining the value proposition of the new URL shortener.
+7. **DevOps**: Generates a `Dockerfile` for the backend, a `Dockerfile` for the frontend, and a `docker-compose.yml` to orchestrate them alongside PostgreSQL.
+
+## 📸 Screenshots / Demo
+
+*(Awaiting Screenshots. When ready, add real screenshots of the Streamlit Dashboard, Project Configuration Screen, and the Real-Time Terminal View here to demonstrate the working UI).*
 
 ## 🛠️ Technology Stack
 
@@ -108,31 +118,32 @@ graph TD
    ```bash
    cp agentforge/.env.example agentforge/.env
    ```
-   Add your preferred LLM API keys to `agentforge/.env` (e.g., `OPENAI_API_KEY`, `GEMINI_API_KEY`).
+   Add your preferred LLM API keys to `agentforge/.env` (e.g., `OPENAI_API_KEY`). Ensure `LLM_API_TYPE` and `LLM_MODEL` are set correctly.
 
 ## 🎮 Usage
 
 1. **Start the FastAPI Backend:**
-   Open a terminal and start the backend orchestration server:
+   Open a terminal and start the backend orchestration server on port 8001:
    ```bash
    python -m uvicorn agentforge.api.main:app --host 0.0.0.0 --port 8001
    ```
 
 2. **Start the Streamlit Frontend:**
-   Open a second terminal and launch the UI:
+   Open a second terminal and launch the UI on port 8501:
    ```bash
    streamlit run agentforge/frontend/app.py
    ```
 
 3. **Launch a Project:**
-   Navigate to `http://localhost:8501`. Enter your project idea, select a tech stack (e.g., FastAPI + React), set a budget, and hit Launch! Track the agents in real-time on the Project Dashboard.
+   Navigate to `http://localhost:8501`. Enter your project idea, select a tech stack, set your maximum LLM token budget, and hit Launch!
 
-## ⚠️ Limitations & Roadmap
+## 🔧 Troubleshooting
 
-- **LLM Hallucinations**: Code generated by the Developer agent is highly dependent on the quality of the underlying LLM. GPT-4 Turbo or Claude 3.5 Sonnet are highly recommended.
-- **Roadmap**: 
-  - Add native GitHub integration to automatically push generated code to a repository.
-  - Implement human-in-the-loop (HITL) approval steps before the Developer agent executes.
+- **Missing API Keys**: If the pipeline immediately fails, ensure your `agentforge/.env` file contains a valid `LLM_API_KEY` and that you have sufficient billing credits with your provider.
+- **Backend Not Running**: If the Streamlit frontend shows connection errors, ensure the FastAPI backend is actively running on port 8001 in a separate terminal.
+- **Frontend/Backend Connection Issues**: If WebSocket updates are failing, verify that `API_HOST` and `API_PORT` in your `.env` match the backend server configuration.
+- **ChromaDB Connection Problems**: If you encounter vector database lock errors, ensure no other processes are accessing the `agentforge/data/chroma` directory. You can safely delete this directory to reset the vector store state.
+- **Dependency Installation Problems**: If `pip install` fails, ensure you are running Python 3.9, 3.10, or 3.11, as some AI dependencies may not yet fully support Python 3.12+.
 
 ## 📜 Acknowledgments & Attribution
 
