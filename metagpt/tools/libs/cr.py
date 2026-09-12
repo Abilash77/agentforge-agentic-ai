@@ -39,7 +39,7 @@ class CodeReview:
         Examples:
 
             >>> cr = CodeReview()
-            >>> await cr.review(patch_path="https://github.com/geekan/MetaGPT/pull/136", output_file="cr/MetaGPT_136.json")
+            >>> await cr.review(patch_path="https://github.com/python/cpython/pull/136", output_file="cr/MetaGPT_136.json")
             >>> await cr.review(patch_path="/data/uploads/dev-master.diff", output_file="cr/dev-master.json")
             >>> await cr.review(patch_path="/data/uploads/main.py", output_file="cr/main.json")
         """

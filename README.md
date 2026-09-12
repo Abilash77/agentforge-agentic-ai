@@ -32,4 +32,4 @@ It acts as an orchestration layer that takes natural language requirements and c
 
 ## Acknowledgments & Attribution
 
-AgentForge is powered by [MetaGPT](https://github.com/geekan/MetaGPT), a powerful multi-agent framework. The underlying MetaGPT framework is distributed under the MIT License.
+AgentForge is powered by MetaGPT, a powerful multi-agent framework. The underlying MetaGPT framework is distributed under the MIT License.

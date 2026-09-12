@@ -51,12 +51,12 @@ class Browser(BaseModel):
     task, executing actions each time based on the content seen on the webpage before proceeding to the next step.
 
     ## Example
-    Issue: The details of the latest issue in the geekan/MetaGPT repository.
-    Plan: Use a browser to view the details of the latest issue in the geekan/MetaGPT repository.
+    Issue: The details of the latest issue in the python/cpython repository.
+    Plan: Use a browser to view the details of the latest issue in the python/cpython repository.
     Solution:
     Let's first open the issue page of the MetaGPT repository with the `Browser.goto` command
 
-    >>> await browser.goto("https://github.com/geekan/MetaGPT/issues")
+    >>> await browser.goto("https://github.com/python/cpython/issues")
 
     From the output webpage, we've identified that the latest issue can be accessed by clicking on the element with ID "1141".
 

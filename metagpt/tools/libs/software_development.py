@@ -30,14 +30,14 @@ async def import_git_repo(url: str) -> Path:
     Imports a project from a Git website and formats it to MetaGPT project format to enable incremental appending requirements.
 
     Args:
-        url (str): The Git project URL, such as "https://github.com/geekan/MetaGPT.git".
+        url (str): The Git project URL, such as "https://github.com/python/cpython.git".
 
     Returns:
         Path: The path of the formatted project.
 
     Example:
         # The Git project URL to input
-        >>> git_url = "https://github.com/geekan/MetaGPT.git"
+        >>> git_url = "https://github.com/python/cpython.git"
 
         # Import the Git repository and get the formatted project path
         >>> formatted_project_path = await import_git_repo(git_url)

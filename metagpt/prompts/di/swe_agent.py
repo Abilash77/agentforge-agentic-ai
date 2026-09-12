@@ -13,7 +13,7 @@ Thought: Firstly, I need to review the detailed information of this issue in ord
 {{
     "command_name": "Browser.goto",
     "args": {{
-        "url": "https://github.com/geekan/MetaGPT/issues/1275"
+        "url": "https://github.com/python/cpython/issues/1275"
     }}
 }}
 ->

@@ -86,7 +86,7 @@ def main():
                 <a href="https://arxiv.org/pdf/2502.06855" target="_blank" style="text-decoration: none;">
                     <img src="https://img.shields.io/badge/Paper-PDF-red.svg" alt="Paper">
                 </a>
-                <a href="https://github.com/geekan/MetaGPT/blob/main/examples/spo/README.md" target="_blank" style="text-decoration: none;">
+                <a href="#" target="_blank" style="text-decoration: none;">
                     <img src="https://img.shields.io/badge/GitHub-Repository-blue.svg" alt="GitHub">
                 </a>
                 <span style="color: #666;">A framework for self-supervised prompt optimization</span>

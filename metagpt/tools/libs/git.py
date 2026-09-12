@@ -38,7 +38,7 @@ async def git_create_pull(
 
     Example:
         >>> # create pull request
-        >>> base_repo_name = "geekan/MetaGPT"
+        >>> base_repo_name = "python/cpython"
         >>> head_repo_name = "ioris/MetaGPT"
         >>> base = "master"
         >>> head = "feature/http"
@@ -59,7 +59,7 @@ async def git_create_pull(
         PullRequest("feat: modify http lib")
         >>> if isinstance(pr, str):
         >>>     print(f"Visit this url to create a new pull request: '{pr}'")
-        Visit this url to create a new pull request: 'https://github.com/geekan/MetaGPT/compare/master...iorisa:MetaGPT:feature/http'
+        Visit this url to create a new pull request: 'https://github.com/python/cpython/compare/master...iorisa:MetaGPT:feature/http'
 
     Returns:
         PullRequest: The created pull request.
@@ -109,7 +109,7 @@ async def git_create_issue(
         body (Optional[str], optional): The body of the issue. Defaults to None.
 
     Example:
-        >>> repo_name = "geekan/MetaGPT"
+        >>> repo_name = "python/cpython"
         >>> title = "This is a new issue"
         >>> from metagpt.tools.libs import get_env
         >>> access_token = await get_env(key="access_token", app_name="github")
